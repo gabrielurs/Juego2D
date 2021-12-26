@@ -1,4 +1,4 @@
-package Juego2d;
+package juego2d;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,7 +36,7 @@ public class Juego extends Canvas implements Runnable{
 
     private synchronized void iniciar(){
         enFuncionamiento = true;
-        thread = new Thread(this, "Graficos");
+        thread = new Thread(this, "graficos");
         thread.start();
     }
 
