@@ -7,5 +7,16 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES />
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/recursos" />
+          <root url="file://$MODULE_DIR$/recursos" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/recursos" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
   </component>
 </module>

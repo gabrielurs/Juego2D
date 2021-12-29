@@ -4,6 +4,9 @@ public class Pantalla {
     private final int ancho;
     private final int alto;
     public final int[] pixeles;
+    //temporal
+    private final static int LADO_SPRITE = 32;
+    private final static int MASCARA_SPRITE = LADO_SPRITE-1;
 
     public Pantalla(final int ancho,final int alto){
         this.ancho = ancho;
@@ -29,8 +32,9 @@ public class Pantalla {
                 if (posicionX<0 || posicionX>=ancho){
                     continue;
                 }
+                //temporal
+                pixeles[posicionX + posicionY * ancho] = Sprite.asfalto.pixeles[(x & MASCARA_SPRITE) + (y & MASCARA_SPRITE)*LADO_SPRITE];
 
-                //redibujar:
             }
         }
     }

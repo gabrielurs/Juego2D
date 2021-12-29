@@ -1,9 +1,11 @@
 package juego2d;
 
 import control.Teclado;
+import graficos.Pantalla;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Juego extends Canvas implements Runnable{
     private static final long serialVersionUID = 1L;
@@ -16,9 +18,17 @@ public class Juego extends Canvas implements Runnable{
     private static int aps = 0;
     private static int fps = 0;
 
+    private static int x = 0;
+    private static int y = 0;
+
+
     private static JFrame ventana;
     private static Thread thread;
     private static Teclado teclado;
+    private static Pantalla pantalla;
+
+    private static BufferedImage imagen = new BufferedImage(ANCHO,ALTO,BufferedImage.TYPE_INT_RGB);
+    
 
     private Juego(){
         setPreferredSize(new Dimension(ANCHO,ALTO));
