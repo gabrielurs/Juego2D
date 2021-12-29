@@ -5,7 +5,12 @@ import graficos.Pantalla;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBuffer;
+import java.awt.image.DataBufferInt;
+import java.io.File;
+import java.io.IOException;
 
 public class Juego extends Canvas implements Runnable{
     private static final long serialVersionUID = 1L;
@@ -28,10 +33,13 @@ public class Juego extends Canvas implements Runnable{
     private static Pantalla pantalla;
 
     private static BufferedImage imagen = new BufferedImage(ANCHO,ALTO,BufferedImage.TYPE_INT_RGB);
-    
+    private static int[] pixeles = ((DataBufferInt) imagen.getRaster().getDataBuffer()).getData();
+
 
     private Juego(){
         setPreferredSize(new Dimension(ANCHO,ALTO));
+        pantalla = new Pantalla(ANCHO,ALTO);
+
         teclado = new Teclado();
         addKeyListener(teclado);
         ventana = new JFrame(NOMBRE);
@@ -45,6 +53,11 @@ public class Juego extends Canvas implements Runnable{
     }
 
     public static void main(String[] args) {
+        try {
+            System.out.println(new File("C:/texturas/desierto.jpg").getCanonicalPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Juego juego = new Juego();
         juego.iniciar();
     }
@@ -75,6 +88,23 @@ public class Juego extends Canvas implements Runnable{
     }
 
     private void mostrar(){
+        BufferStrategy estrategia = getBufferStrategy();
+        if (estrategia==null){
+            createBufferStrategy(3);
+            return;
+        }
+        pantalla.limpiar();
+        pantalla.mostrar(x,y);
+
+        System.arraycopy(pantalla.pixeles,0,pixeles,0,pixeles.length);
+//        for (int i = 0; i < pixeles.length; i++) {
+//            pixeles[i]=pantalla.pixeles[i];
+//        }
+
+        Graphics g = estrategia.getDrawGraphics();
+        g.drawImage(imagen,0,0,getWidth(),getHeight(),null);
+        g.dispose();
+        estrategia.show();
         fps++;
     }
 

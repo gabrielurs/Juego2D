@@ -20,7 +20,7 @@ public class HojaSprites {
 
         BufferedImage imagen;
         try {
-            imagen = ImageIO.read(HojaSprites.class.getResource(ruta));
+            imagen = ImageIO.read(HojaSprites.class.getResourceAsStream(ruta));
             imagen.getRGB(0,0,ancho,alto,pixeles,0,ancho);
         } catch (IOException e) {
             e.printStackTrace();
